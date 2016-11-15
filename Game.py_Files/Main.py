@@ -10,7 +10,6 @@ class Game:
     def __init__(self):
         # Initialize game window, etc
         pg.init()
-        pg.mixer.init()
         self.screen = pg.display.set_mode((Width, Height))
         pg.display.set_caption("Slime EVO")
         self.Clock = pg.time.Clock()
@@ -62,9 +61,7 @@ class Game:
         pass
 
 g = Game()
-g.show_start_screen()
 while g.running:
     g.new()
-    g.show_go_Screen()
 
 pg.quit()
