@@ -1,22 +1,24 @@
 import pygame, sys, time
 from pygame.locals import *
+from pygame.transform import scale
 
 pygame.init()
 
 FPS=90
 fpsClock=pygame.time.Clock()
 
-width=400
-height=300
+width=807
+height=489
 DISPLAYSURF=pygame.display.set_mode((width,height),0,32)
 pygame.display.set_caption('Animation')
-background=pygame.image.load('Background.png')
+background=pygame.image.load('Slime Evo background.png')
 
 
 
 DOWN='down'
 
 sprite=pygame.image.load('SlimeR.png')
+sprite = pygame.transform.scale(sprite,(35, 35),)
 spritex=200
 spritey=130
 direction=DOWN
@@ -38,10 +40,13 @@ while True:
         if event.type == KEYDOWN:
             if (event.key == K_LEFT):
                 sprite=pygame.image.load('Slimeleft.png')
+                sprite = pygame.transform.scale(sprite,(40, 40),)
             elif (event.key == K_RIGHT):
                 sprite=pygame.image.load('Slimeright.fw.png')
+                sprite = pygame.transform.scale(sprite, (40, 40),)
             elif (event.key == K_UP):
                 sprite=pygame.image.load('SlimeR.png')
+                sprite = pygame.transform.scale(sprite, (35, 35),)
             #elif (event.key == K_DOWN):
                 #sprite=pygame.image.load('SlimeR.png')
 
