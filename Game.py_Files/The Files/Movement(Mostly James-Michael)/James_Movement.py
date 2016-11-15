@@ -4,6 +4,7 @@ from pygame.transform import scale
 
 pygame.init()
 
+white = (255, 255, 255)
 FPS=90
 fpsClock=pygame.time.Clock()
 
@@ -12,6 +13,22 @@ height=489
 DISPLAYSURF=pygame.display.set_mode((width,height),0,32)
 pygame.display.set_caption('Animation')
 background=pygame.image.load('Slime Evo background.png')
+
+# Boundary boxes
+floor1 = pygame.draw.rect(background, white,(0, 395, 210, 20))
+floor2 = pygame.draw.rect(background, white,(200, 412, 20, 20))
+floor3 = pygame.draw.rect(background, white,(210, 420, 20, 20))
+floor4 = pygame.draw.rect(background, white,(222, 425, 20, 20))
+floor5 = pygame.draw.rect(background, white,(230, 431, 130, 20))
+floor6 = pygame.draw.rect(background, white,(355, 425, 20, 20))
+floor7 = pygame.draw.rect(background, white,(365, 420, 20, 20))
+floor8 = pygame.draw.rect(background, white,(375, 412, 20, 20))
+floor9 = pygame.draw.rect(background, white,(385, 395, 170, 20))
+floor10 = pygame.draw.rect(background, white,(545, 369, 130, 35))
+floor11 = pygame.draw.rect(background, white,(648, 344, 159, 35))
+
+wall1 = pygame.draw.rect(background, white,(0, 0, 10, 400))
+wall2 = pygame.draw.rect(background, white,(799, 0, 10, 370))
 
 
 
@@ -97,6 +114,8 @@ while True:
     # movey - converge to 0
     print sprite_state
     print movey
+
+
 
     pygame.display.update()
     fpsClock.tick(FPS)
