@@ -69,7 +69,6 @@ class Slime:
                 movey = -4
                 sprite_state = 'JUMPING'
 
-
 DOWN ='down'
 direction=DOWN
 velocity = 0
