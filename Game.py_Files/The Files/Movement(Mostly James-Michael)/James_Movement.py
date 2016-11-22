@@ -1,4 +1,4 @@
-import pygame, sys, time
+import pygame, sys, time, os
 from pygame.locals import *
 from pygame.transform import scale
 
@@ -15,14 +15,15 @@ DISPLAYSURF=pygame.display.set_mode((width,height),0,32)
 pygame.display.set_caption('Animation')
 background=pygame.image.load('Slime Evo background.png')
 
-# Boundary boxes
-class Boundary:
+
+# Floors boxes
+class Floors:
     def __init__(self):
-        self.boundaryLocation = ([0, 395, 210, 20], [200, 412, 20, 20], [210, 420, 20, 20], [222, 425, 20, 20], [230, 431, 130, 20], [355, 425, 20, 20], [365, 420, 20, 20],
+        self.FloorsLocation = ([0, 395, 210, 20], [200, 412, 20, 20], [210, 420, 20, 20], [222, 425, 20, 20], [230, 431, 130, 20], [355, 425, 20, 20], [365, 420, 20, 20],
             [375, 412, 20, 20], [385, 395, 170, 20], [545, 369, 130, 35], [648, 344, 159, 35], [0, 0, 10, 400], [799, 0, 10, 370])
     def Draw(self):
         for i in xrange(0,13):
-            self.boxes = pygame.draw.rect(background, white,(self.boundaryLocation[i]))
+            self.boxes = pygame.draw.rect(background, white,(self.FloorsLocation[i]))
 
 #Sprite class
 class Slime(pygame.sprite.Sprite):
@@ -38,15 +39,15 @@ class Slime(pygame.sprite.Sprite):
 
     def Update(self):
         keys_pressed = pygame.key.get_pressed()
-        pygame.draw.rect(background, white, (self.xPosition, self.yPosition, 35, 35))
+        #pygame.draw.rect(background, white, (self.xPosition, self.yPosition, 35, 35))
         if keys_pressed[K_LEFT]:
             self.sprite = pygame.image.load('Slimeleft.png')
-            self.sprite = pygame.transform.scale(self.sprite, (40, 40), )
+            self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
             self.xPosition -= 5
 
         if keys_pressed[K_RIGHT]:
             self.sprite = pygame.image.load('Slimeright.fw.png')
-            self.sprite = pygame.transform.scale(self.sprite, (40, 40), )
+            self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
             self.xPosition += 5
 
         if keys_pressed[K_UP]:
@@ -59,6 +60,12 @@ class Slime(pygame.sprite.Sprite):
             self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
             self.yPosition += 5
 
+#if self.rect.colliderect(self.Floorslocation):
+            #self.yPosition == 0
+            #self.xPosition == 0
+
+
+#while self.boudarylocation == self.rect
             #if keys_pressed[K_SPACE]:
             #if pygame.key.set_repeat(1, 1):
             #   movey = -4
@@ -71,11 +78,11 @@ movex = 0
 movey = 0
 sprite_state = 'RESTING'
 Slime = Slime()
-Boundary = Boundary()
+Floors = Floors()
 
 while True:
     DISPLAYSURF.blit(background,(0,0))
-    Boundary.Draw()
+    Floors.Draw()
     Slime.Draw()
     Slime.Update()
     for event in pygame.event.get():
