@@ -1,37 +1,39 @@
 import pygame, sys, time, os
 from pygame.locals import *
-from pygame.transform import scale
+
 
 pygame.init()
 
-white = (255, 255, 255)
+black = (0, 0, 0)
 FPS=90
 fpsClock=pygame.time.Clock()
 
 # Display window
-width=807
-height=489
+width=816
+height=437
 DISPLAYSURF=pygame.display.set_mode((width,height),0,32)
-pygame.display.set_caption('Animation')
-background=pygame.image.load('Slime Evo background.png')
+pygame.display.set_caption('Slime Evo')
+background=pygame.image.load ('Black & White Level Design.png')
 
 
 # Floors boxes
 class Floors:
     def __init__(self):
-        self.FloorsLocation = ([0, 395, 210, 20], [200, 412, 20, 20], [210, 420, 20, 20], [222, 425, 20, 20], [230, 431, 130, 20], [355, 425, 20, 20], [365, 420, 20, 20],
-            [375, 412, 20, 20], [385, 395, 170, 20], [545, 369, 130, 35], [648, 344, 159, 35], [0, 0, 10, 400], [799, 0, 10, 370])
+        self.FloorsLocation = ([0, 375, 81, 62], [0, 0, 40, 400], [35, 125, 407, 42], [81, 0, 416, 84], [483, 84, 14, 138], [81, 208, 405, 14], [81, 210, 14, 123],
+            [81, 319, 347, 14], [123, 375, 41, 62], [207, 375, 41, 62], [289, 375, 42, 62], [497, 0, 319, 14], [497, 194, 70, 28], [552, 219, 15, 114], [567, 319, 180, 14],
+            [137, 263, 374, 15], [470, 275, 41, 102], [372, 375, 181, 62], [540, 388, 27, 49], [560, 416, 170, 21], [719, 388, 98, 49], [733, 375, 83, 18], [788, 55, 29, 350],
+            [539, 55, 42, 98], [622, 55, 14, 90], [678, 55, 13, 90], [733, 55, 14, 90], [580, 139, 220, 14], [608, 150, 200, 128])
     def Draw(self):
-        for i in xrange(0,13):
-            self.boxes = pygame.draw.rect(background, white,(self.FloorsLocation[i]))
+        for i in xrange(0, 29):
+            self.boxes = pygame.draw.rect(background, black,(self.FloorsLocation[i]))
 
 # Sprite class
 class Slime(pygame.sprite.Sprite):
     def __init__(self):
         self.sprite = pygame.image.load('SlimeR.png')
-        self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
-        self.xPosition = 10
-        self.yPosition = 360
+        self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
+        self.xPosition = 45
+        self.yPosition = 10
         self.rect = self.sprite.get_rect()
 
     def Draw(self):
@@ -52,12 +54,12 @@ class Slime(pygame.sprite.Sprite):
 
         if keys_pressed[K_UP]:
             self.sprite = pygame.image.load('SlimeR.png')
-            self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
+            self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
             self.yPosition -= 5
 
         if keys_pressed[K_DOWN]:
             self.sprite = pygame.image.load('SlimeR.png')
-            self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
+            self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
             self.yPosition += 5
 
         #if self.rect.colliderect(self.Floorslocation):
