@@ -25,7 +25,7 @@ class Floors:
         for i in xrange(0,13):
             self.boxes = pygame.draw.rect(background, white,(self.FloorsLocation[i]))
 
-#Sprite class
+# Sprite class
 class Slime(pygame.sprite.Sprite):
     def __init__(self):
         self.sprite = pygame.image.load('SlimeR.png')
@@ -60,9 +60,9 @@ class Slime(pygame.sprite.Sprite):
             self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
             self.yPosition += 5
 
-#if self.rect.colliderect(self.Floorslocation):
+        #if self.rect.colliderect(self.Floorslocation):
             #self.yPosition == 0
-            #self.xPosition == 0
+           # self.xPosition == 0
 
 
 #while self.boudarylocation == self.rect
