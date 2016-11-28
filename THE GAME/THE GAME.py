@@ -62,7 +62,7 @@ class Slime(pygame.sprite.Sprite):
             self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
             self.yPosition += 5
 
-        #if self.rect.colliderect(self.Floorslocation):
+        #if self.rect.colliderect(Floors.rect):
             #self.yPosition == 0
            # self.xPosition == 0
 
