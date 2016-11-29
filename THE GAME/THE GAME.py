@@ -9,29 +9,27 @@ FPS=90
 fpsClock=pygame.time.Clock()
 
 # Display window
-width=816
-height=437
+width=807
+height=489
 DISPLAYSURF=pygame.display.set_mode((width,height),0,32)
 pygame.display.set_caption('Slime Evo')
-background=pygame.image.load ('Black & White Level Design.png')
+background = pygame.image.load ('Bridge.png')
 collide = False
 
 # Floors boxes
 class Floors:
     def __init__(self):
-        self.FloorsLocation = ([0, 375, 81, 62], [0, 0, 40, 400], [35, 125, 407, 42], [81, 0, 416, 84], [483, 84, 14, 138], [81, 208, 405, 14], [81, 210, 14, 123],
-            [81, 319, 347, 14], [123, 375, 41, 62], [207, 375, 41, 62], [289, 375, 42, 62], [497, 0, 319, 14], [497, 194, 70, 28], [552, 219, 15, 114], [567, 319, 180, 14],
-            [137, 263, 374, 15], [470, 275, 41, 102], [372, 375, 181, 62], [540, 388, 27, 49], [560, 416, 170, 21], [719, 388, 98, 49], [733, 375, 83, 18], [788, 55, 29, 350],
-            [539, 55, 42, 98], [622, 55, 14, 90], [678, 55, 13, 90], [733, 55, 14, 90], [580, 139, 220, 14], [608, 150, 200, 128])
+        self.FloorsLocation = ([0, 0, 20, 415], [0, 393, 201, 20], [193, 400, 20, 20], [203, 414, 20, 20], [215, 423, 20, 20], [230, 430, 135, 20], [358, 423, 20, 20],
+            [373, 410, 20, 20], [383, 397, 20, 20], [395, 393, 190, 20], [544, 369, 190, 30], [646, 345, 161, 30], [787, 0, 20, 350])
 
     def Draw(self):
-        for i in xrange(0, 29):
+        for i in xrange(0, 13):
             self.boxes = pygame.draw.rect(background, black,(self.FloorsLocation[i]))
 
             self.rect = pygame.Rect(self.boxes)
 
     def check_for_collisions(self, spriteRect):
-        for i in xrange(0, 29):
+        for i in xrange(0, 13):
             if check_collision(spriteRect, Rect(self.FloorsLocation[i])) == True:
                 print "Colliding with" + str(self.FloorsLocation[i])
                 return True
@@ -47,8 +45,8 @@ class Slime(pygame.sprite.Sprite):
     def __init__(self):
         self.sprite = pygame.image.load('SlimeR.png')
         self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
-        self.xPosition = 45
-        self.yPosition = 10
+        self.xPosition = 25
+        self.yPosition = 350
         self.rect = self.sprite.get_rect()
         # compare lime to floor[i]
 
@@ -104,11 +102,9 @@ class Slime(pygame.sprite.Sprite):
             self.yPosition += 1
 
             if Floors.check_for_collisions(self.rect) == True:
-                self.yPosition -= 4
                 if self.yPosition > 0:
                     self.rect.bottom = Floors.rect.top
-
-
+                    self.yPosition -= 4
         #if self.rect.colliderect(Floors.rect):
             #self.yPosition == 0
            # self.xPosition == 0
