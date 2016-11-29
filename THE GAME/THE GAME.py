@@ -101,10 +101,12 @@ class Slime(pygame.sprite.Sprite):
             self.sprite = pygame.transform.scale(self.sprite, (25, 25), )
             self.yPosition += 1
 
-            if Floors.check_for_collisions(self.rect) == True:
+            collide = Floors.check_for_collisions(self.rect)
+            if collide == True:
+                self.yPosition -= 4
                 if self.yPosition > 0:
                     self.rect.bottom = Floors.rect.top
-                    self.yPosition -= 4
+
         #if self.rect.colliderect(Floors.rect):
             #self.yPosition == 0
            # self.xPosition == 0
