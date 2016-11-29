@@ -14,7 +14,7 @@ height=437
 DISPLAYSURF=pygame.display.set_mode((width,height),0,32)
 pygame.display.set_caption('Slime Evo')
 background=pygame.image.load ('Black & White Level Design.png')
-
+collide = False
 
 # Floors boxes
 class Floors:
@@ -23,9 +23,24 @@ class Floors:
             [81, 319, 347, 14], [123, 375, 41, 62], [207, 375, 41, 62], [289, 375, 42, 62], [497, 0, 319, 14], [497, 194, 70, 28], [552, 219, 15, 114], [567, 319, 180, 14],
             [137, 263, 374, 15], [470, 275, 41, 102], [372, 375, 181, 62], [540, 388, 27, 49], [560, 416, 170, 21], [719, 388, 98, 49], [733, 375, 83, 18], [788, 55, 29, 350],
             [539, 55, 42, 98], [622, 55, 14, 90], [678, 55, 13, 90], [733, 55, 14, 90], [580, 139, 220, 14], [608, 150, 200, 128])
+
     def Draw(self):
         for i in xrange(0, 29):
             self.boxes = pygame.draw.rect(background, black,(self.FloorsLocation[i]))
+
+            self.rect = pygame.Rect(self.boxes)
+
+    def check_for_collisions(self, spriteRect):
+        for i in xrange(0, 29):
+            if check_collision(spriteRect, Rect(self.FloorsLocation[i])) == True:
+                print "Colliding with" + str(self.FloorsLocation[i])
+                return True
+        return False
+
+def check_collision(collider, colliding):
+    return collider.colliderect(colliding)
+
+Floors = Floors()
 
 # Sprite class
 class Slime(pygame.sprite.Sprite):
@@ -35,32 +50,64 @@ class Slime(pygame.sprite.Sprite):
         self.xPosition = 45
         self.yPosition = 10
         self.rect = self.sprite.get_rect()
+        # compare lime to floor[i]
 
     def Draw(self):
         DISPLAYSURF.blit(self.sprite, (self.xPosition, self.yPosition))
+        pygame.draw.rect(DISPLAYSURF, (255, 43, 55), self.rect)
 
     def Update(self):
+
+        self.rect.x = self.xPosition
+        self.rect.y = self.yPosition
+
         keys_pressed = pygame.key.get_pressed()
+
         #pygame.draw.rect(background, white, (self.xPosition, self.yPosition, 35, 35))
         if keys_pressed[K_LEFT]:
-            self.sprite = pygame.image.load('Slimeleft.png')
-            self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
-            self.xPosition -= 5
+                self.sprite = pygame.image.load('Slimeleft.png')
+                self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
+                self.xPosition -= 1
 
-        if keys_pressed[K_RIGHT]:
+                collide = Floors.check_for_collisions(self.rect)
+                if collide == True:
+                    self.xPosition += 4
+                    if self.xPosition < 0:
+                        self.rect.left = Floors.rect.left
+
+        elif keys_pressed[K_RIGHT]:
+
             self.sprite = pygame.image.load('Slimeright.fw.png')
-            self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
-            self.xPosition += 5
-
-        if keys_pressed[K_UP]:
-            self.sprite = pygame.image.load('SlimeR.png')
             self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
-            self.yPosition -= 5
+            self.xPosition += 1
 
-        if keys_pressed[K_DOWN]:
+            collide = Floors.check_for_collisions(self.rect)
+            if collide == True:
+                self.xPosition -= 4
+                if self.xPosition > 0:
+                    self.rect.right = Floors.rect.left
+
+        elif keys_pressed[K_UP]:
             self.sprite = pygame.image.load('SlimeR.png')
-            self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
-            self.yPosition += 5
+            self.sprite = pygame.transform.scale(self.sprite, (25, 25), )
+            self.yPosition -= 1
+
+            collide = Floors.check_for_collisions(self.rect)
+            if collide == True:
+                self.yPosition += 4
+                if self.yPosition < 0:
+                    self.rect.top = Floors.rect.bottom
+
+        elif keys_pressed[K_DOWN]:
+            self.sprite = pygame.image.load('SlimeR.png')
+            self.sprite = pygame.transform.scale(self.sprite, (25, 25), )
+            self.yPosition += 1
+
+            if Floors.check_for_collisions(self.rect) == True:
+                self.yPosition -= 4
+                if self.yPosition > 0:
+                    self.rect.bottom = Floors.rect.top
+
 
         #if self.rect.colliderect(Floors.rect):
             #self.yPosition == 0
@@ -80,7 +127,6 @@ movex = 0
 movey = 0
 sprite_state = 'RESTING'
 Slime = Slime()
-Floors = Floors()
 
 while True:
     DISPLAYSURF.blit(background,(0,0))
