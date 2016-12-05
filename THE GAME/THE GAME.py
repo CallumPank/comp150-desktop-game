@@ -24,18 +24,7 @@ global slime2
 slime2 = pygame.image.load('Slimeleft.png')
 collide = False
 
-<<<<<<< HEAD
-global splitstate
-splitstate = 0
-print splitstate
-global slime1
-slime1 = pygame.image.load('Slimeleft.png')
-global slime2
-slime2 = pygame.image.load('Slimeleft.png')
-# Floors boxes
-=======
 # Floors boxes [x, y, width, height]
->>>>>>> ec22b311c4df7a7a1a7e3a5b518ee8d8d93d2e6e
 class Floors:
     def __init__(self):
         self.FloorsLocation = ([0, 393, 201, 20], [193, 400, 20, 20], [203, 414, 20, 20], [215, 423, 20, 20],
@@ -74,31 +63,6 @@ class Slime(pygame.sprite.Sprite):
         self.jumpSpeed = 0
         self.rect = self.sprite.get_rect()
         self.spawn = False
-<<<<<<< HEAD
-        # compare lime to floor[i]
-
-    def Split(self):
-        # Split state 0 = Has not split/is one whole slime. Split state 1 = Has split and cannot split further currently.
-        speed = 0.5
-        # Returns information on whether or not the user has split yet
-    # Changes the split_state appropriately.
-
-    def set_split_state(self):
-        Splitstate = 0
-        if self.get_split_state() == 0:
-            slime2.xP = slime2.xP - slime1.xP * speed
-            slime2.yP = slime2.yP - slime1.yP * speed
-            Splistate = 1
-        else:
-            Splistate = 0
-
-    def get_split_state(self):
-        return splitstate
-
-    def Draw(self):
-        DISPLAYSURF.blit(self.sprite, (self.xPosition, self.yPosition))
-        pygame.draw.rect(DISPLAYSURF, (255, 43, 55), self.rect)
-=======
 
     def Split(self):
         # Split state 0 = Has not split/is one whole slime. Split state 1 = Has split and cannot split further currently.
@@ -133,7 +97,6 @@ class Slime(pygame.sprite.Sprite):
 
 
 
->>>>>>> ec22b311c4df7a7a1a7e3a5b518ee8d8d93d2e6e
 
     def Update(self):
 
@@ -141,75 +104,6 @@ class Slime(pygame.sprite.Sprite):
         self.rect.y = self.yPosition
 
 
-<<<<<<< HEAD
-        keys_pressed = pygame.key.get_pressed()
-        # pygame.draw.rect(background, white, (self.xPosition, self.yPosition, 35, 35))
-        if keys_pressed[K_LEFT]:
-            self.sprite = pygame.image.load('Slimeleft.png')
-            self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
-            self.xPosition -= 2
-        elif keys_pressed[K_RIGHT]:
-            self.sprite = pygame.image.load('Slimeright.fw.png')
-            self.sprite = pygame.transform.scale(self.sprite, (35, 35), )
-            self.xPosition += 2
-        elif keys_pressed[K_UP]:
-            self.sprite = pygame.image.load('SlimeR.png')
-            self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
-            self.yPosition -= 2
-        elif keys_pressed[K_DOWN]:
-            self.sprite = pygame.image.load('SlimeR.png')
-            self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
-            self.yPosition += 2
-        else:
-            self.sprite = pygame.image.load('SlimeR.png')
-            self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
-        if keys_pressed[K_i]:
-            if self.spawn:
-                Slime2.xPosition = 5000
-                Slime2.yPosition = 5000
-                self.spawn = False
-            else:
-                Slime2.xPosition = self.xPosition
-                Slime2.yPosition = self.yPosition
-                self.spawn = True
-                # Slime.set_split_state()
-                # print Slime.get_split_state()
-
-        class Slime2(pygame.sprite.Sprite):
-            def __init__(self):
-                self.sprite2 = pygame.image.load('SlimeR.png')
-                self.sprite2 = pygame.transform.scale(self.sprite2, (30, 30), )
-                self.xPosition = Slime.xPosition
-                self.yPosition = Slime.yPosition
-                self.rect = self.sprite2.get_rect()
-
-            def Draw(self):
-                DISPLAYSURF.blit(self.sprite2, (self.xPosition, self.yPosition))
-
-            def Update(self):
-                keys_pressed = pygame.key.get_pressed()
-                # pygame.draw.rect(background, white, (self.xPosition, self.yPosition, 35, 35))
-                if keys_pressed[K_a]:
-                    self.sprite2 = pygame.image.load('Slimeleft.png')
-                    self.sprite2 = pygame.transform.scale(self.sprite2, (35, 35), )
-                    self.xPosition -= 2
-                elif keys_pressed[K_d]:
-                    self.sprite2 = pygame.image.load('Slimeright.fw.png')
-                    self.sprite2 = pygame.transform.scale(self.sprite2, (35, 35), )
-                    self.xPosition += 2
-                elif keys_pressed[K_w]:
-                    self.sprite2 = pygame.image.load('SlimeR.png')
-                    self.sprite2 = pygame.transform.scale(self.sprite2, (30, 30), )
-                    self.yPosition -= 2
-                elif keys_pressed[K_s]:
-                    self.sprite2 = pygame.image.load('SlimeR.png')
-                    self.sprite2 = pygame.transform.scale(self.sprite2, (30, 30), )
-                    self.yPosition += 2
-                else:
-                    self.sprite2 = pygame.image.load('SlimeR.png')
-                    self.sprite2 = pygame.transform.scale(self.sprite2, (30, 30), )
-
-=======
         if self.rect.x and self.xPosition > width:
             self.rect.x = width
             self.xPosition = width
@@ -229,15 +123,12 @@ class Slime(pygame.sprite.Sprite):
                 self.sprite = pygame.image.load('Slimeleft.png')
                 self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
                 self.xPosition -= 0.6
->>>>>>> ec22b311c4df7a7a1a7e3a5b518ee8d8d93d2e6e
 
                 collide = Floors.check_for_collisions(self.rect)
                 if collide == True:
                     if self.xPosition < 0:
                         self.rect.left = Floors.rect.left
 
-<<<<<<< HEAD
-=======
 
         elif keys_pressed[K_RIGHT]:
 
@@ -245,14 +136,11 @@ class Slime(pygame.sprite.Sprite):
             self.sprite = pygame.transform.scale(self.sprite, (30, 30), )
             self.xPosition += 2
 
->>>>>>> ec22b311c4df7a7a1a7e3a5b518ee8d8d93d2e6e
             collide = Floors.check_for_collisions(self.rect)
             if collide == True:
                 if self.xPosition > 0:
                     self.rect.right = Floors.rect.left
 
-<<<<<<< HEAD
-=======
         elif keys_pressed[K_UP]:
             self.sprite = pygame.image.load('SlimeR.png')
             self.sprite = pygame.transform.scale(self.sprite, (25, 25), )
@@ -261,26 +149,11 @@ class Slime(pygame.sprite.Sprite):
             else:
                 self.jumpSpeed -= 0.6
             self.yPosition -= self.jumpSpeed
->>>>>>> ec22b311c4df7a7a1a7e3a5b518ee8d8d93d2e6e
             collide = Floors.check_for_collisions(self.rect)
             if collide == True:
                 self.jumpSpeed = 0
                 if self.yPosition < 0:
-<<<<<<< HEAD
-                    self.rect.top = Floors.rect.bottom
-
-        if keys_pressed[K_i]:
-            if self.spawn:
-                Slime2.xPosition = 5000
-                Slime2.yPosition = 5000
-                self.spawn = False
-            else:
-                Slime2.xPosition = self.xPosition
-                Slime2.yPosition = self.yPosition
-                self.spawn = True
-=======
                     self.yPosition = 0
->>>>>>> ec22b311c4df7a7a1a7e3a5b518ee8d8d93d2e6e
 
         elif keys_pressed[K_i]:
             if self.spawn:
@@ -292,43 +165,6 @@ class Slime(pygame.sprite.Sprite):
                 Slime2.yPosition = self.yPosition
                 self.spawn = True
 
-<<<<<<< HEAD
-class Slime2(pygame.sprite.Sprite):
-    def __init__(self):
-        self.sprite2 = pygame.image.load('SlimeR.png')
-        self.sprite2 = pygame.transform.scale(self.sprite2, (30, 30), )
-        self.xPosition = Slime.xPosition
-        self.yPosition = Slime.yPosition
-        self.rect = self.sprite2.get_rect()
-    def Draw(self):
-        DISPLAYSURF.blit(self.sprite2, (self.xPosition, self.yPosition))
-    def Update(self):
-        keys_pressed = pygame.key.get_pressed()
-        # pygame.draw.rect(background, white, (self.xPosition, self.yPosition, 35, 35))
-        if keys_pressed[K_a]:
-            self.sprite2 = pygame.image.load('Slimeleft.png')
-            self.sprite2 = pygame.transform.scale(self.sprite2, (35, 35), )
-            self.xPosition -= 2
-        elif keys_pressed[K_d]:
-            self.sprite2 = pygame.image.load('Slimeright.fw.png')
-            self.sprite2 = pygame.transform.scale(self.sprite2, (35, 35), )
-            self.xPosition += 2
-        elif keys_pressed[K_w]:
-            self.sprite2 = pygame.image.load('SlimeR.png')
-            self.sprite2 = pygame.transform.scale(self.sprite2, (30, 30), )
-            self.yPosition -= 2
-        elif keys_pressed[K_s]:
-            self.sprite2 = pygame.image.load('SlimeR.png')
-            self.sprite2 = pygame.transform.scale(self.sprite2, (30, 30), )
-            self.yPosition += 2
-        else:
-            self.sprite2 = pygame.image.load('SlimeR.png')
-            self.sprite2 = pygame.transform.scale(self.sprite2,(30,30), )
-
-Slime = Slime()
-Slime2 = Slime2()
-Floors = Floors()
-=======
                 # Slime.set_split_state()
                 # print Slime.get_split_state()
 
@@ -403,7 +239,6 @@ movey = 0
 sprite_state = 'RESTING'
 Slime = Slime()
 Slime2 = Slime2()
->>>>>>> ec22b311c4df7a7a1a7e3a5b518ee8d8d93d2e6e
 
 while True:
 
@@ -418,11 +253,8 @@ while True:
         if event.type==QUIT:
             pygame.quit()
             sys.exit()
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> ec22b311c4df7a7a1a7e3a5b518ee8d8d93d2e6e
     pygame.display.update()
     fpsClock.tick(FPS)
